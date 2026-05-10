@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PetVet — Health. Tracked. Always.</title>
+<meta name="description" content="PetVet is South Africa's pet health management platform. Track vaccinations, vet visits, costs and locate your pet — all in one place."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --deep:    #085041;
+  --anchor:  #0F6E56;
+  --core:    #1D9E75;
+  --mint:    #9FE1CB;
+  --mist:    #E6F7F4;
+  --bark:    #2C2C1A;
+  --amber:   #EF9F27;
+  --cream:   #F1EFE8;
+  --white:   #FFFFFF;
+  --gray:    #888780;
+  --lgray:   #D3D1C7;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-sans:  'DM Sans', sans-serif;
+  --font-mono:  'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-sans); background: var(--white); color: var(--bark); line-height: 1.6; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(29,158,117,0.12);
+  padding: 0 2rem; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo svg { width: 38px; height: 38px; }
+.nav-wordmark { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--deep); letter-spacing: -0.5px; }
+.nav-wordmark span { color: var(--core); }
+.nav-links { display: flex; align-items: center; gap: 0.25rem; }
+.nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--bark); text-decoration: none; padding: 0.4rem 0.75rem; border-radius: 6px; transition: all 0.2s; }
+.nav-links a:hover { background: var(--mist); color: var(--deep); }
+.nav-cta { background: var(--deep) !important; color: var(--white) !important; padding: 0.45rem 1.1rem !important; border-radius: 8px !important; }
+.nav-cta:hover { background: var(--anchor) !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--bark); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--lgray); padding: 1rem; z-index: 99; flex-direction: column; gap: 0.25rem; }
+.mobile-menu a { display: block; padding: 0.75rem 1rem; font-weight: 500; color: var(--bark); text-decoration: none; border-radius: 8px; }
+.mobile-menu a:hover { background: var(--mist); color: var(--deep); }
+.mobile-menu .mcta { background: var(--deep); color: white !important; text-align: center; margin-top: 0.5rem; }
+
+/* SECTIONS */
+section { padding: 6rem 2rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; color: var(--core); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem; }
+h1 { font-family: var(--font-serif); font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.1; color: var(--deep); }
+h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.2; color: var(--deep); }
+h3 { font-family: var(--font-serif); font-size: 1.4rem; color: var(--deep); margin-bottom: 0.5rem; }
+p { color: #4a4a3a; line-height: 1.75; }
+
+/* HERO */
+#home {
+  min-height: 100vh; display: flex; align-items: center;
+  background: linear-gradient(135deg, var(--deep) 0%, var(--anchor) 60%, var(--core) 100%);
+  position: relative; overflow: hidden; padding-top: 64px;
+}
+.hero-bg-pulse {
+  position: absolute; top: 50%; left: 0; right: 0;
+  transform: translateY(-50%); opacity: 0.06; pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+.hero-content .section-label { color: var(--mint); }
+.hero-content h1 { color: var(--white); margin-bottom: 1.25rem; }
+.hero-content h1 em { font-style: italic; color: var(--mint); }
+.hero-content p { color: rgba(255,255,255,0.8); font-size: 1.15rem; max-width: 520px; margin-bottom: 2rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+.btn-primary { background: var(--white); color: var(--deep); }
+.btn-primary:hover { background: var(--mint); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.4); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--mint); }
+.btn-teal { background: var(--deep); color: var(--white); }
+.btn-teal:hover { background: var(--anchor); transform: translateY(-1px); }
+.btn-teal-outline { background: transparent; color: var(--deep); border: 1.5px solid var(--deep); }
+.btn-teal-outline:hover { background: var(--mist); }
+.hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; }
+.hero-stat { }
+.hero-stat .num { font-family: var(--font-serif); font-size: 2rem; color: var(--mint); display: block; }
+.hero-stat .lbl { font-size: 0.8rem; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
+.hero-visual { position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); opacity: 0.12; pointer-events: none; }
+
+/* FEATURES */
+#features { background: var(--cream); }
+.features-intro { text-align: center; max-width: 600px; margin: 0 auto 3.5rem; }
+.features-intro p { margin-top: 1rem; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.feature-card {
+  background: var(--white); border-radius: 16px; padding: 2rem;
+  border: 1px solid rgba(29,158,117,0.1);
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--core), var(--mint)); opacity: 0; transition: opacity 0.3s; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(8,80,65,0.12); }
+.feature-card:hover::before { opacity: 1; }
+.feature-icon { width: 48px; height: 48px; background: var(--mist); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+.feature-icon svg { width: 24px; height: 24px; }
+.feature-card p { font-size: 0.9rem; color: var(--gray); margin-top: 0.5rem; }
+.feature-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 4px; margin-top: 1rem; background: var(--mist); color: var(--anchor); }
+.feature-tag.coming { background: #FEF3E2; color: #B87D0A; }
+
+/* HOW IT WORKS */
+#how-it-works { background: var(--white); }
+.hiw-intro { text-align: center; max-width: 600px; margin: 0 auto 3.5rem; }
+.hiw-intro p { margin-top: 1rem; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; position: relative; }
+.step { text-align: center; padding: 1.5rem 1rem; }
+.step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--deep); color: var(--white); font-family: var(--font-serif); font-size: 1.4rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+.step p { font-size: 0.9rem; color: var(--gray); margin-top: 0.5rem; }
+.hiw-cta { text-align: center; margin-top: 3rem; }
+
+/* PRICING */
+#pricing { background: var(--cream); }
+.pricing-intro { text-align: center; max-width: 560px; margin: 0 auto 3rem; }
+.pricing-intro p { margin-top: 1rem; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+.price-card { background: var(--white); border-radius: 16px; padding: 2rem; border: 1px solid rgba(29,158,117,0.12); }
+.price-card.featured { background: var(--deep); border-color: var(--deep); position: relative; }
+.price-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--amber); color: var(--bark); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 0.25rem 0.8rem; border-radius: 20px; white-space: nowrap; }
+.price-tier { font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--core); margin-bottom: 0.75rem; }
+.price-card.featured .price-tier { color: var(--mint); }
+.price-amount { font-family: var(--font-serif); font-size: 2.5rem; color: var(--deep); line-height: 1; }
+.price-card.featured .price-amount { color: var(--white); }
+.price-period { font-size: 0.85rem; color: var(--gray); margin-left: 4px; }
+.price-card.featured .price-period { color: rgba(255,255,255,0.6); }
+.price-desc { font-size: 0.9rem; color: var(--gray); margin: 0.75rem 0 1.5rem; }
+.price-card.featured .price-desc { color: rgba(255,255,255,0.7); }
+.price-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
+.price-features li { font-size: 0.9rem; display: flex; align-items: flex-start; gap: 0.6rem; color: var(--bark); }
+.price-card.featured .price-features li { color: rgba(255,255,255,0.9); }
+.price-features li::before { content: '✓'; color: var(--core); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.price-card.featured .price-features li::before { color: var(--mint); }
+.price-card .btn { width: 100%; justify-content: center; }
+
+/* VETS */
+#for-vets { background: var(--white); }
+.vets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.vets-content .section-label { margin-bottom: 0.75rem; }
+.vets-content h2 { margin-bottom: 1rem; }
+.vets-content p { margin-bottom: 1.5rem; }
+.vets-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2rem; }
+.vets-benefits li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; }
+.vets-benefits li::before { content: '→'; color: var(--core); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.vets-visual { background: var(--mist); border-radius: 20px; padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.vet-card-mini { background: var(--white); border-radius: 12px; padding: 1rem 1.25rem; border: 1px solid rgba(29,158,117,0.15); }
+.vet-card-mini .label { font-size: 0.75rem; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.25rem; }
+.vet-card-mini .value { font-weight: 600; color: var(--deep); }
+.vet-card-mini .value.amber { color: var(--amber); }
+.vet-card-mini .value.good { color: var(--core); }
+
+/* PETLOCATE */
+#petlocate { background: var(--deep); }
+.petlocate-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.petlocate-content .section-label { color: var(--mint); }
+.petlocate-content h2 { color: var(--white); margin-bottom: 1rem; }
+.petlocate-content p { color: rgba(255,255,255,0.75); margin-bottom: 1.5rem; }
+.locate-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+.locate-features li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+.locate-features li::before { content: '◉'; color: var(--mint); font-size: 0.6rem; flex-shrink: 0; margin-top: 5px; }
+.locate-visual { position: relative; }
+.locate-map-mock { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+.coming-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(239,159,39,0.15); border: 1px solid rgba(239,159,39,0.3); color: var(--amber); font-size: 0.8rem; font-weight: 600; padding: 0.4rem 0.9rem; border-radius: 20px; margin-bottom: 1.25rem; }
+.coming-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); animation: pulse-dot 1.5s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+/* ABOUT */
+#about { background: var(--cream); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.about-content p { margin-bottom: 1rem; }
+.directors { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+.director-card { background: var(--white); border-radius: 12px; padding: 1.25rem; border: 1px solid rgba(29,158,117,0.1); display: flex; align-items: center; gap: 1rem; }
+.director-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--deep); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.1rem; color: var(--mint); flex-shrink: 0; }
+.director-name { font-weight: 600; color: var(--deep); font-size: 0.95rem; }
+.director-role { font-size: 0.8rem; color: var(--gray); }
+.reg-block { background: var(--white); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(29,158,117,0.1); font-family: var(--font-mono); font-size: 0.8rem; color: var(--gray); line-height: 2; }
+.reg-block strong { color: var(--deep); font-weight: 500; }
+.mission-block { background: var(--deep); border-radius: 16px; padding: 2rem; color: rgba(255,255,255,0.85); }
+.mission-block h3 { color: var(--mint); margin-bottom: 0.75rem; }
+
+/* CONTACT */
+#contact { background: var(--white); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 0.85rem; font-weight: 500; color: var(--bark); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 0.7rem 1rem; border-radius: 8px; border: 1.5px solid var(--lgray);
+  font-family: var(--font-sans); font-size: 0.95rem; color: var(--bark);
+  background: var(--cream); transition: border-color 0.2s; outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--core); background: var(--white); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+.contact-info h3 { margin-bottom: 0.25rem; }
+.contact-info p { font-size: 0.95rem; }
+.waitlist-highlight { background: var(--mist); border-radius: 16px; padding: 2rem; border: 1px solid rgba(29,158,117,0.15); }
+.waitlist-highlight h3 { color: var(--deep); margin-bottom: 0.5rem; }
+.waitlist-highlight p { font-size: 0.9rem; color: var(--gray); margin-bottom: 1.25rem; }
+
+/* FOOTER */
+footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2rem; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; }
+.footer-brand p { font-size: 0.875rem; margin-top: 0.75rem; max-width: 260px; }
+.footer-brand .nav-wordmark { color: var(--white); font-size: 1.1rem; }
+.footer-col h4 { font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+.footer-col a { display: block; font-size: 0.875rem; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 0.5rem; transition: color 0.2s; }
+.footer-col a:hover { color: var(--mint); }
+.footer-bottom { max-width: 1100px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; }
+.footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.footer-bottom a:hover { color: var(--mint); }
+
+/* PULSE MARK SVG */
+.pulse-mark { display: inline-block; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .vets-grid, .petlocate-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  section { padding: 4rem 1.25rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+}
+@media (max-width: 480px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ACTIVE NAV */
+.nav-links a.active { color: var(--core); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="38" height="38" rx="9" fill="#085041"/>
+      <polyline points="4,19 9,19 12,11 15,25 18,15 21,19 26,19" fill="none" stroke="#9FE1CB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="30" cy="19" rx="5.5" ry="4.5" fill="#1D9E75"/>
+      <ellipse cx="24.5" cy="13.5" rx="2.5" ry="2" fill="#1D9E75"/>
+      <ellipse cx="28" cy="11.5" rx="2.5" ry="2" fill="#1D9E75"/>
+      <ellipse cx="32" cy="11.5" rx="2.5" ry="2" fill="#1D9E75"/>
+      <ellipse cx="35.5" cy="13.5" rx="2.5" ry="2" fill="#1D9E75"/>
+    </svg>
+    <span class="nav-wordmark">Pet<span>Vet</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#for-vets">For Vets</a>
+    <a href="#petlocate">PetLocate</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="http://localhost:3004" class="nav-cta">Open App →</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="toggleMenu()">Features</a>
+  <a href="#how-it-works" onclick="toggleMenu()">How it works</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#for-vets" onclick="toggleMenu()">For Vets</a>
+  <a href="#petlocate" onclick="toggleMenu()">PetLocate</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="http://localhost:3004" class="mcta">Open App →</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <svg class="hero-bg-pulse" viewBox="0 0 1200 200" fill="none" preserveAspectRatio="xMidYMid slice">
+    <polyline points="0,100 150,100 220,30 290,160 360,70 430,100 600,100 670,100 740,30 810,160 880,70 950,100 1200,100" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="container">
+    <div class="hero-content fade-up">
+      <p class="section-label">South Africa's Pet Health Platform</p>
+      <h1>Your pet's health.<br/><em>Tracked. Always.</em></h1>
+      <p>Complete health records, smart reminders, vet cost tracking and location management — everything a responsible pet owner needs in one place.</p>
+      <div class="hero-actions">
+        <a href="http://localhost:3004" class="btn btn-primary">Get Started Free →</a>
+        <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">∞</span><span class="lbl">Health records</span></div>
+        <div class="hero-stat"><span class="num">100%</span><span class="lbl">POPIA compliant</span></div>
+        <div class="hero-stat"><span class="num">ZA</span><span class="lbl">Built for SA</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="features-intro fade-up">
+      <p class="section-label">Platform Features</p>
+      <h2>Everything your pet needs. Nothing they don't.</h2>
+      <p>Built from the ground up for South African pet owners who take their responsibility seriously.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>Health Records</h3>
+        <p>Complete vaccination history, vet visits, treatments, diagnoses and prescriptions — all in one verifiable timeline.</p>
+        <span class="feature-tag">Live</span>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        </div>
+        <h3>Smart Reminders</h3>
+        <p>Automated nudges for upcoming vaccinations, deworming, annual checkups and licence renewals. Never miss a due date again.</p>
+        <span class="feature-tag">Live</span>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>Vet Cost Tracker</h3>
+        <p>Log every vet expense, track spend by category and pet, and budget ahead for routine care. Full financial visibility.</p>
+        <span class="feature-tag">Live</span>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3>Document Vault</h3>
+        <p>Securely store vaccination certificates, microchip records, adoption papers and vet reports. Accessible anywhere, anytime.</p>
+        <span class="feature-tag">Live</span>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3>PetLocate</h3>
+        <p>Real-time GPS tracking, lost pet alerts, area control zones and neighbourhood safety maps — coming to PetVet soon.</p>
+        <span class="feature-tag coming">Coming Soon</span>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3>Multi-Pet Profiles</h3>
+        <p>Manage dogs, cats, birds, rabbits and more under one account. Each pet gets their own complete health profile.</p>
+        <span class="feature-tag">Live</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="hiw-intro fade-up">
+      <p class="section-label">How It Works</p>
+      <h2>Up and running in under 5 minutes.</h2>
+      <p>No complicated setup. No vet integrations required. Just you and your pet's health, organised.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step-num">1</div>
+        <h3>Create your account</h3>
+        <p>Register with your email. POPIA-compliant from day one. Your data stays yours.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">2</div>
+        <h3>Add your pets</h3>
+        <p>Build a profile for each pet — species, breed, age, microchip number and a photo.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">3</div>
+        <h3>Log their health</h3>
+        <p>Enter vaccinations, vet visits and treatments. Set the next due date and reminders fire automatically.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">4</div>
+        <h3>Stay accountable</h3>
+        <p>Get nudged before deadlines, track costs, and build a complete health record that travels with your pet.</p>
+      </div>
+    </div>
+    <div class="hiw-cta fade-up">
+      <a href="http://localhost:3004" class="btn btn-teal">Start Tracking Your Pet →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-intro fade-up">
+      <p class="section-label">Pricing</p>
+      <h2>Simple, honest pricing.</h2>
+      <p>Start free. Upgrade when you need more. No hidden fees, no vet subscription required.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card fade-up">
+        <div class="price-tier">Free</div>
+        <div><span class="price-amount">R0</span><span class="price-period">/ month</span></div>
+        <p class="price-desc">Perfect for a single pet and getting started.</p>
+        <ul class="price-features">
+          <li>1 pet profile</li>
+          <li>Health records &amp; vaccinations</li>
+          <li>Basic reminders</li>
+          <li>Document storage (250MB)</li>
+          <li>Expense tracking</li>
+        </ul>
+        <a href="http://localhost:3004" class="btn btn-teal-outline">Get Started Free</a>
+      </div>
+      <div class="price-card featured fade-up">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier">Pro</div>
+        <div><span class="price-amount">R49</span><span class="price-period">/ month</span></div>
+        <p class="price-desc">For multi-pet households who take health seriously.</p>
+        <ul class="price-features">
+          <li>Unlimited pet profiles</li>
+          <li>Advanced reminders &amp; alerts</li>
+          <li>Full expense analytics</li>
+          <li>Document storage (5GB)</li>
+          <li>Shareable health reports</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="http://localhost:3004" class="btn btn-primary">Start Pro Free →</a>
+      </div>
+      <div class="price-card fade-up">
+        <div class="price-tier">Clinic</div>
+        <div><span class="price-amount">R299</span><span class="price-period">/ month</span></div>
+        <p class="price-desc">For veterinary practices managing client records.</p>
+        <ul class="price-features">
+          <li>Unlimited client pets</li>
+          <li>Clinic dashboard</li>
+          <li>Patient record access</li>
+          <li>Reminder co-management</li>
+          <li>White-label reports</li>
+          <li>API access</li>
+        </ul>
+        <a href="#contact" class="btn btn-teal-outline">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR VETS -->
+<section id="for-vets">
+  <div class="container">
+    <div class="vets-grid">
+      <div class="vets-content fade-up">
+        <p class="section-label">For Vets &amp; Clinics</p>
+        <h2>Your clients. Better prepared.</h2>
+        <p>When pet owners arrive with a complete PetVet health record, your consultations become faster, more accurate and more effective.</p>
+        <ul class="vets-benefits">
+          <li>Complete vaccination and treatment history on arrival</li>
+          <li>No more "I think the last injection was about a year ago"</li>
+          <li>Shared reminders reduce missed appointments</li>
+          <li>Digital records reduce paperwork at reception</li>
+          <li>Clinic dashboard to view and update patient records</li>
+          <li>Branded health reports for owner take-home</li>
+        </ul>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="#contact" class="btn btn-teal">Partner With Us →</a>
+          <a href="#pricing" class="btn btn-teal-outline">See Clinic Pricing</a>
+        </div>
+      </div>
+      <div class="vets-visual fade-up">
+        <div class="vet-card-mini">
+          <div class="label">Patient</div>
+          <div class="value">Biscuit · Golden Retriever · 3yrs</div>
+        </div>
+        <div class="vet-card-mini">
+          <div class="label">Last Vaccination</div>
+          <div class="value good">✓ DHPP · 14 March 2026 · Up to date</div>
+        </div>
+        <div class="vet-card-mini">
+          <div class="label">Next Due</div>
+          <div class="value amber">⚠ Rabies booster · Due 14 June 2026</div>
+        </div>
+        <div class="vet-card-mini">
+          <div class="label">Allergies / Notes</div>
+          <div class="value">Penicillin sensitivity noted</div>
+        </div>
+        <div class="vet-card-mini">
+          <div class="label">YTD Vet Spend</div>
+          <div class="value good">R2,340 across 4 visits</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PETLOCATE -->
+<section id="petlocate">
+  <div class="container">
+    <div class="petlocate-inner">
+      <div class="petlocate-content fade-up">
+        <div class="coming-badge"><span class="coming-dot"></span> Coming Soon</div>
+        <p class="section-label">PetLocate</p>
+        <h2>Know where your pet is. Always.</h2>
+        <p>PetLocate brings real-time GPS tracking, lost pet alerts and neighbourhood area control directly into your PetVet account.</p>
+        <ul class="locate-features">
+          <li>Real-time GPS tracking on your phone</li>
+          <li>Geofence zones — get alerted if your pet leaves a safe area</li>
+          <li>Lost pet broadcast to your neighbourhood</li>
+          <li>Area health and safety alerts (tick season, known hazards)</li>
+          <li>Full location history log</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline">Join the Waitlist →</a>
+      </div>
+      <div class="locate-visual fade-up">
+        <div class="locate-map-mock">
+          <svg viewBox="0 0 240 240" width="240" height="240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Grid lines -->
+            <line x1="0" y1="60" x2="240" y2="60" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <line x1="0" y1="120" x2="240" y2="120" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <line x1="0" y1="180" x2="240" y2="180" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <line x1="60" y1="0" x2="60" y2="240" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <line x1="120" y1="0" x2="120" y2="240" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <line x1="180" y1="0" x2="180" y2="240" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <!-- Safe zone circle -->
+            <circle cx="120" cy="120" r="70" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="6 4" fill="rgba(29,158,117,0.05)"/>
+            <!-- Pet marker -->
+            <circle cx="120" cy="105" r="12" fill="#1D9E75"/>
+            <text x="120" y="110" text-anchor="middle" font-size="12" fill="white">🐾</text>
+            <line x1="120" y1="117" x2="120" y2="130" stroke="#1D9E75" stroke-width="2"/>
+            <circle cx="120" cy="132" r="3" fill="#1D9E75"/>
+            <!-- Pulse rings -->
+            <circle cx="120" cy="105" r="20" stroke="#1D9E75" stroke-width="1" opacity="0.4"/>
+            <circle cx="120" cy="105" r="30" stroke="#1D9E75" stroke-width="0.5" opacity="0.2"/>
+            <!-- Label -->
+            <rect x="85" y="75" width="70" height="20" rx="4" fill="rgba(29,158,117,0.9)"/>
+            <text x="120" y="89" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif">Biscuit · Home</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-up">
+        <p class="section-label">About PetVet</p>
+        <h2>Built by pet owners, for pet owners.</h2>
+        <div style="margin-top:1.25rem;">
+          <p>PetVet was founded with a simple belief: responsible pet ownership starts with knowing your animal's health history. Too many South African pets miss critical vaccinations, treatments get forgotten, and vet visits go undocumented.</p>
+          <p style="margin-top:0.75rem;">We built the platform we wished existed — one that makes accountability effortless, keeps records permanent, and puts owners in control of their pet's wellbeing.</p>
+        </div>
+        <div class="directors">
+          <div class="director-card">
+            <div class="director-avatar">SV</div>
+            <div>
+              <div class="director-name">Stephen van der Merwe</div>
+              <div class="director-role">Co-Founder &amp; Director</div>
+            </div>
+          </div>
+          <div class="director-card">
+            <div class="director-avatar">CV</div>
+            <div>
+              <div class="director-name">Charleen van der Merwe</div>
+              <div class="director-role">Co-Founder &amp; Director</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up" style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div class="mission-block">
+          <h3>Our mission</h3>
+          <p>To make South Africa the most accountable pet-owning nation on the continent — one health record at a time.</p>
+        </div>
+        <div class="reg-block">
+          <div><strong>Company:</strong> PetVet (PTY) Ltd</div>
+          <div><strong>Registration:</strong> 2026/370983/07</div>
+          <div><strong>Domain:</strong> petvet.org.za</div>
+          <div><strong>Country:</strong> South Africa</div>
+          <div><strong>Compliance:</strong> POPIA Act 4 of 2013</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="fade-up">
+        <p class="section-label">Get In Touch</p>
+        <h2>Talk to us.</h2>
+        <p style="margin-bottom:2rem;">Whether you're a pet owner, vet practice or potential partner — we want to hear from you.</p>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First name</label>
+              <input type="text" placeholder="Stephen" required/>
+            </div>
+            <div class="form-group">
+              <label>Last name</label>
+              <input type="text" placeholder="van der Merwe" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email address</label>
+            <input type="email" placeholder="you@example.com" required/>
+          </div>
+          <div class="form-group">
+            <label>I am a...</label>
+            <select>
+              <option>Pet owner</option>
+              <option>Veterinarian / Clinic</option>
+              <option>Pet service provider</option>
+              <option>Investor / Partner</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us what's on your mind..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-teal" style="width:100%;justify-content:center;">Send Message →</button>
+        </form>
+      </div>
+      <div class="fade-up">
+        <div class="waitlist-highlight">
+          <h3>Join the PetLocate waitlist</h3>
+          <p>Be first to access GPS tracking and area control when PetLocate launches. No spam, just a single notification when it's ready.</p>
+          <form onsubmit="handleWaitlist(event)" style="display:flex;flex-direction:column;gap:0.75rem;">
+            <input type="email" placeholder="your@email.com" style="padding:0.7rem 1rem;border-radius:8px;border:1.5px solid rgba(29,158,117,0.3);font-family:var(--font-sans);font-size:0.95rem;background:white;outline:none;" required/>
+            <button type="submit" class="btn btn-teal" style="justify-content:center;">Join PetLocate Waitlist →</button>
+          </form>
+        </div>
+        <div style="margin-top:1.5rem;padding:1.5rem;background:var(--cream);border-radius:16px;">
+          <h3 style="margin-bottom:1rem;">Quick links</h3>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <a href="http://localhost:3004" class="btn btn-teal" style="justify-content:center;">Open PetVet App →</a>
+            <a href="http://localhost:3004/register" class="btn btn-teal-outline" style="justify-content:center;">Create Free Account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="nav-wordmark">Pet<span style="color:var(--mint)">Vet</span></span>
+      <p>South Africa's pet health management platform. Health. Tracked. Always.</p>
+      <p style="margin-top:0.5rem;font-size:0.75rem;opacity:0.5;">Reg 2026/370983/07 · POPIA Compliant</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#petlocate">PetLocate</a>
+    </div>
+    <div class="footer-col">
+      <h4>For Vets</h4>
+      <a href="#for-vets">Clinic Partner</a>
+      <a href="#pricing">Clinic Pricing</a>
+      <a href="#contact">Get In Touch</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="http://localhost:3004">Open App</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 PetVet (PTY) Ltd · All rights reserved</span>
+    <div style="display:flex;gap:1.5rem;">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">POPIA Notice</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Fade-up on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = '✓ Message sent!';
+  btn.style.background = 'var(--core)';
+  setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
+}
+
+function handleWaitlist(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = '✓ You\'re on the list!';
+  btn.style.background = 'var(--core)';
+  setTimeout(() => { btn.textContent = 'Join PetLocate Waitlist →'; btn.style.background = ''; }, 3000);
+}
+</script>
+</body>
+</html>

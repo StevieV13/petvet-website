@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>POPIA Notice — PetVet</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--deep:#085041;--anchor:#0F6E56;--core:#1D9E75;--mint:#9FE1CB;--mist:#E6F7F4;--bark:#2C2C1A;--cream:#F1EFE8;--gray:#888780;--lgray:#D3D1C7;--font-serif:'DM Serif Display',Georgia,serif;--font-sans:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--cream);color:var(--bark);line-height:1.7}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(29,158,117,0.12);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo svg{width:32px;height:32px}
+.nav-wordmark{font-family:var(--font-sans);font-size:1.1rem;font-weight:700;color:var(--deep);letter-spacing:-0.5px}
+.nav-wordmark span{color:var(--core)}
+.nav-back{font-size:0.875rem;font-weight:500;color:var(--anchor);text-decoration:none;padding:0.4rem 0.75rem;border-radius:6px;transition:all 0.2s}
+.nav-back:hover{background:var(--mist)}
+.hero{background:linear-gradient(135deg,var(--deep) 0%,var(--anchor) 100%);padding:8rem 2rem 4rem;text-align:center}
+.hero p.label{font-family:var(--font-mono);font-size:0.75rem;color:var(--mint);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem}
+.hero h1{font-family:var(--font-serif);font-size:clamp(2rem,4vw,3rem);color:white;margin-bottom:1rem}
+.hero p.sub{color:rgba(255,255,255,0.7);font-size:0.95rem;max-width:560px;margin:0 auto}
+.effective{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);font-size:0.8rem;font-family:var(--font-mono);padding:0.4rem 1rem;border-radius:20px;margin-top:1.5rem}
+.content{max-width:780px;margin:0 auto;padding:4rem 2rem 6rem}
+.popia-card{background:white;border:2px solid var(--core);border-radius:16px;padding:2rem;margin-bottom:3rem}
+.popia-card h2{font-family:var(--font-serif);font-size:1.3rem;color:var(--deep);margin-bottom:1.25rem}
+.info-row{display:grid;grid-template-columns:180px 1fr;gap:0.75rem 1.5rem;margin-bottom:0.75rem;align-items:start}
+.info-row .lbl{font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--gray)}
+.info-row .val{font-size:0.95rem;color:var(--bark)}
+.section{margin-bottom:3rem}
+.section h2{font-family:var(--font-serif);font-size:1.5rem;color:var(--deep);margin-bottom:1rem;padding-top:1rem;border-top:2px solid var(--mist)}
+.section h3{font-family:var(--font-sans);font-size:1rem;font-weight:600;color:var(--anchor);margin:1.25rem 0 0.5rem}
+.section p{font-size:0.95rem;color:#4a4a3a;margin-bottom:0.75rem}
+.section ul{padding-left:1.25rem;margin-bottom:0.75rem;display:flex;flex-direction:column;gap:0.4rem}
+.section ul li{font-size:0.95rem;color:#4a4a3a}
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.right-card{background:white;border:1px solid rgba(29,158,117,0.15);border-radius:12px;padding:1.25rem}
+.right-card h4{font-size:0.9rem;font-weight:600;color:var(--deep);margin-bottom:0.4rem}
+.right-card p{font-size:0.85rem;color:var(--gray);margin:0}
+.highlight{background:var(--mist);border-left:3px solid var(--core);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:1rem 0}
+.highlight p{margin:0;font-size:0.9rem;color:var(--deep)}
+.regulator-box{background:white;border:1px solid rgba(29,158,117,0.15);border-radius:12px;padding:1.5rem;margin-top:1rem}
+.regulator-box h3{font-family:var(--font-serif);font-size:1rem;color:var(--deep);margin-bottom:0.75rem}
+.regulator-box p{font-size:0.9rem;color:#4a4a3a;margin-bottom:0.25rem}
+.contact-box{background:var(--deep);border-radius:12px;padding:2rem;margin-top:2rem;text-align:center}
+.contact-box h3{font-family:var(--font-serif);color:var(--mint);margin-bottom:0.5rem}
+.contact-box p{color:rgba(255,255,255,0.75);font-size:0.9rem}
+.contact-box a{color:var(--mint);text-decoration:none;font-weight:500}
+footer{background:var(--bark);color:rgba(255,255,255,0.5);padding:2rem;text-align:center;font-size:0.8rem}
+footer a{color:rgba(255,255,255,0.4);text-decoration:none;margin:0 0.75rem}
+footer a:hover{color:var(--mint)}
+@media(max-width:600px){.rights-grid{grid-template-columns:1fr}.info-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="#085041"/><polyline points="3,16 7,16 10,9 13,21 16,13 19,16 22,16" fill="none" stroke="#9FE1CB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="26" cy="16" rx="4.5" ry="3.5" fill="#1D9E75"/><ellipse cx="21.5" cy="11.5" rx="2" ry="1.6" fill="#1D9E75"/><ellipse cx="25" cy="9.5" rx="2" ry="1.6" fill="#1D9E75"/><ellipse cx="29" cy="9.5" rx="2" ry="1.6" fill="#1D9E75"/><ellipse cx="32" cy="11.5" rx="2" ry="1.6" fill="#1D9E75"/></svg>
+    <span class="nav-wordmark">Pet<span>Vet</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="hero">
+  <p class="label">Legal</p>
+  <h1>POPIA Notice</h1>
+  <p class="sub">Our commitment to compliance with the Protection of Personal Information Act 4 of 2013.</p>
+  <span class="effective">Effective date: 10 May 2026</span>
+</div>
+
+<div class="content">
+
+  <div class="popia-card">
+    <h2>Responsible Party Details</h2>
+    <div class="info-row"><span class="lbl">Entity name</span><span class="val">PetVet (PTY) Ltd</span></div>
+    <div class="info-row"><span class="lbl">Registration</span><span class="val">2026/370983/07</span></div>
+    <div class="info-row"><span class="lbl">Directors</span><span class="val">Stephen van der Merwe &amp; Charleen van der Merwe</span></div>
+    <div class="info-row"><span class="lbl">Country</span><span class="val">Republic of South Africa</span></div>
+    <div class="info-row"><span class="lbl">Website</span><span class="val">petvet.org.za</span></div>
+    <div class="info-row"><span class="lbl">Privacy contact</span><span class="val">privacy@petvet.org.za</span></div>
+    <div class="info-row"><span class="lbl">Information Officer</span><span class="val">Stephen van der Merwe</span></div>
+  </div>
+
+  <div class="section">
+    <h2>What is POPIA?</h2>
+    <p>The Protection of Personal Information Act 4 of 2013 (POPIA) is South Africa's primary data protection legislation. It regulates how organisations collect, store, use, and share personal information about South African residents.</p>
+    <p>POPIA gives you rights over your personal information and places obligations on organisations like PetVet to handle that information responsibly and lawfully.</p>
+    <div class="highlight">
+      <p>PetVet is fully committed to POPIA compliance. We treat the protection of your personal information as a core responsibility, not a checkbox.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Lawful basis for processing</h2>
+    <p>PetVet processes your personal information on the following lawful grounds under POPIA:</p>
+    <ul>
+      <li><strong>Contract:</strong> Processing necessary to provide the services you have signed up for</li>
+      <li><strong>Consent:</strong> Where you have given us explicit consent (e.g. sharing records with a vet)</li>
+      <li><strong>Legitimate interest:</strong> Platform security, fraud prevention, and service improvement</li>
+      <li><strong>Legal obligation:</strong> Where required by South African law</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Categories of personal information processed</h2>
+    <h3>General personal information</h3>
+    <ul>
+      <li>Name and email address</li>
+      <li>Account credentials (passwords stored in encrypted form)</li>
+      <li>Payment information (processed by our payment provider — not stored by PetVet directly)</li>
+      <li>Device and usage information</li>
+    </ul>
+    <h3>Pet health information</h3>
+    <p>Pet health records are personal information under POPIA to the extent that they are associated with an identifiable owner. This includes vaccination records, treatment history, vet visit notes, and uploaded documents.</p>
+    <p>We treat pet health data with the same care as personal health information and apply appropriate security controls.</p>
+  </div>
+
+  <div class="section">
+    <h2>Transborder information flows</h2>
+    <p>PetVet uses Supabase (hosted on AWS infrastructure) for data storage. Some data may be processed outside of South Africa. Where this occurs, we ensure that adequate levels of protection are in place in accordance with section 72 of POPIA.</p>
+    <p>Our cloud infrastructure partners are contractually bound to process data only in accordance with our instructions and applicable data protection law.</p>
+  </div>
+
+  <div class="section">
+    <h2>Your rights under POPIA</h2>
+    <p>As a data subject under POPIA, you have the following rights. You may exercise any of these rights by contacting us at privacy@petvet.org.za.</p>
+    <div class="rights-grid">
+      <div class="right-card">
+        <h4>Right to access</h4>
+        <p>Request a copy of the personal information we hold about you. We will respond within 30 days.</p>
+      </div>
+      <div class="right-card">
+        <h4>Right to correction</h4>
+        <p>Request that we correct any inaccurate or incomplete personal information we hold about you.</p>
+      </div>
+      <div class="right-card">
+        <h4>Right to deletion</h4>
+        <p>Request that we delete your personal information, subject to any legal retention requirements.</p>
+      </div>
+      <div class="right-card">
+        <h4>Right to object</h4>
+        <p>Object to the processing of your personal information in certain circumstances, including for direct marketing.</p>
+      </div>
+      <div class="right-card">
+        <h4>Right to restrict</h4>
+        <p>Request that we restrict the processing of your personal information in certain circumstances.</p>
+      </div>
+      <div class="right-card">
+        <h4>Right to complain</h4>
+        <p>Lodge a complaint with the Information Regulator if you believe we have violated your POPIA rights.</p>
+      </div>
+    </div>
+    <p>We will acknowledge your request within 5 business days and provide a full response within 30 days. In complex cases, we may extend this period by a further 30 days with notice to you.</p>
+  </div>
+
+  <div class="section">
+    <h2>Direct marketing</h2>
+    <p>We may from time to time send you information about PetVet features, updates, or offers that may be of interest to you. You have the right to opt out of direct marketing at any time by:</p>
+    <ul>
+      <li>Clicking the unsubscribe link in any marketing email</li>
+      <li>Updating your notification preferences in your account settings</li>
+      <li>Emailing us at privacy@petvet.org.za</li>
+    </ul>
+    <p>Opting out of marketing does not affect transactional communications such as reminder notifications, which are core to the service you have requested.</p>
+  </div>
+
+  <div class="section">
+    <h2>Security measures</h2>
+    <p>In accordance with section 19 of POPIA, PetVet implements appropriate technical and organisational measures to protect your personal information, including:</p>
+    <ul>
+      <li>TLS encryption for all data in transit</li>
+      <li>Encrypted storage of passwords using industry-standard hashing</li>
+      <li>Row-level security policies on all database tables</li>
+      <li>Role-based access controls for internal systems</li>
+      <li>Regular security assessments of our platform</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Data breach notification</h2>
+    <p>In the event of a security compromise that is likely to affect you, we will notify you and the Information Regulator as soon as reasonably possible, in accordance with section 22 of POPIA.</p>
+    <p>Our breach notification will include the nature of the compromise, the personal information affected, and steps we are taking to address it.</p>
+  </div>
+
+  <div class="section">
+    <h2>Information Regulator</h2>
+    <p>If you are not satisfied with how we have handled your personal information or your POPIA rights request, you have the right to lodge a complaint with the Information Regulator of South Africa:</p>
+    <div class="regulator-box">
+      <h3>The Information Regulator (South Africa)</h3>
+      <p>Website: <a href="https://inforegulator.org.za" style="color:var(--anchor)">inforegulator.org.za</a></p>
+      <p>Email: inforeg@justice.gov.za</p>
+      <p>Complaints email: PAIAComplaints@inforegulator.org.za</p>
+      <p>POPIAComplaints: POPIAComplaints@inforegulator.org.za</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Contact our Information Officer</h2>
+    <div class="contact-box">
+      <h3>POPIA enquiries</h3>
+      <p>Our Information Officer handles all POPIA-related requests and complaints.</p>
+      <p style="margin-top:0.5rem"><strong style="color:white">Stephen van der Merwe</strong><br/>Information Officer, PetVet (PTY) Ltd</p>
+      <p style="margin-top:1rem"><a href="mailto:privacy@petvet.org.za">privacy@petvet.org.za</a></p>
+      <p style="margin-top:0.5rem;font-size:0.8rem">We aim to respond to all POPIA requests within 5 business days.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 PetVet (PTY) Ltd · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a> · <a href="popia.html">POPIA Notice</a> · <a href="index.html">Back to site</a></p>
+</footer>
+</body>
+</html>

@@ -7,356 +7,246 @@
 <meta name="description" content="PetVet is South Africa's pet health management platform. Track vaccinations, vet visits, costs and locate your pet — all in one place."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ── Design tokens — mirrors petvet-app tailwind.config.ts ─────────────── */
 :root {
-  --green:        #1E3A0F;
-  --green-mid:    #2D5016;
-  --green-soft:   #4A7C2B;
-  --green-pale:   #EAF3DE;
-  --green-mist:   #F2F8EC;
-  --terra:        #C4622D;
-  --terra-soft:   #E07040;
-  --terra-pale:   #FAECE7;
-  --cream:        #FAF7F2;
-  --cream-dark:   #F0EBE1;
-  --muted:        #7A6E5F;
-  --bark:         #6B4C2A;
-  --sand:         #D4C4A8;
-  --white:        #FFFFFF;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-sans:    'DM Sans', system-ui, sans-serif;
+  --deep:    #085041;
+  --anchor:  #0F6E56;
+  --core:    #1D9E75;
+  --mint:    #9FE1CB;
+  --mist:    #E6F7F4;
+  --bark:    #2C2C1A;
+  --amber:   #EF9F27;
+  --cream:   #F1EFE8;
+  --white:   #FFFFFF;
+  --gray:    #888780;
+  --lgray:   #D3D1C7;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-sans:  'DM Sans', sans-serif;
+  --font-mono:  'DM Mono', monospace;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: var(--font-sans); background: var(--cream); color: var(--green); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); background: var(--white); color: var(--bark); line-height: 1.6; overflow-x: hidden; }
 
-/* ── TYPOGRAPHY ──────────────────────────────────────────────────────────── */
-h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.15; color: var(--green); }
-h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
-h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
-h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
-p  { color: var(--muted); line-height: 1.75; }
-
-/* ── LAYOUT ──────────────────────────────────────────────────────────────── */
-section  { padding: 6rem 2rem; }
-.container { max-width: 1100px; margin: 0 auto; }
-.section-label {
-  font-family: var(--font-sans); font-size: 0.72rem; font-weight: 600;
-  color: var(--green-soft); letter-spacing: 3px; text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-/* ── NAV ─────────────────────────────────────────────────────────────────── */
+/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(250,247,242,0.96); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(30,58,15,0.08);
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(29,158,117,0.12);
   padding: 0 2rem; height: 64px;
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-wordmark { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--green); letter-spacing: -0.5px; }
-.nav-wordmark span { color: var(--terra); }
+.nav-logo svg { width: 38px; height: 38px; }
+.nav-wordmark { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--deep); letter-spacing: -0.5px; }
+.nav-wordmark span { color: var(--core); }
 .nav-links { display: flex; align-items: center; gap: 0.25rem; }
-.nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--muted); text-decoration: none; padding: 0.4rem 0.75rem; border-radius: 8px; transition: all 0.2s; }
-.nav-links a:hover { background: var(--green-mist); color: var(--green); }
-.nav-links a.active { color: var(--green-soft); }
-.nav-cta { background: var(--terra) !important; color: var(--white) !important; padding: 0.45rem 1.1rem !important; border-radius: 10px !important; }
-.nav-cta:hover { background: var(--terra-soft) !important; transform: translateY(-1px); }
+.nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--bark); text-decoration: none; padding: 0.4rem 0.75rem; border-radius: 6px; transition: all 0.2s; }
+.nav-links a:hover { background: var(--mist); color: var(--deep); }
+.nav-cta { background: var(--deep) !important; color: var(--white) !important; padding: 0.45rem 1.1rem !important; border-radius: 8px !important; }
+.nav-cta:hover { background: var(--anchor) !important; }
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.hamburger span { display: block; width: 22px; height: 2px; background: var(--green); border-radius: 2px; transition: all 0.3s; }
-.mobile-menu {
-  display: none; position: fixed; top: 64px; left: 0; right: 0;
-  background: var(--cream); border-bottom: 1px solid var(--green-pale);
-  padding: 1rem; z-index: 99; flex-direction: column; gap: 0.25rem;
-  box-shadow: 0 8px 24px rgba(30,58,15,0.08);
-}
-.mobile-menu a { display: block; padding: 0.75rem 1rem; font-weight: 500; color: var(--green); text-decoration: none; border-radius: 10px; }
-.mobile-menu a:hover { background: var(--green-mist); }
-.mobile-menu .mcta { background: var(--terra); color: white !important; text-align: center; margin-top: 0.5rem; border-radius: 10px; }
-.mobile-menu .mcta:hover { background: var(--terra-soft); }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--bark); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--lgray); padding: 1rem; z-index: 99; flex-direction: column; gap: 0.25rem; }
+.mobile-menu a { display: block; padding: 0.75rem 1rem; font-weight: 500; color: var(--bark); text-decoration: none; border-radius: 8px; }
+.mobile-menu a:hover { background: var(--mist); color: var(--deep); }
+.mobile-menu .mcta { background: var(--deep); color: white !important; text-align: center; margin-top: 0.5rem; }
 
-/* ── BUTTONS ─────────────────────────────────────────────────────────────── */
-.btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.75rem 1.5rem; border-radius: 12px;
-  font-weight: 600; font-size: 0.9rem; font-family: var(--font-sans);
-  text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
-}
-.btn-primary   { background: var(--white); color: var(--green); }
-.btn-primary:hover { background: var(--green-pale); transform: translateY(-1px); }
-.btn-outline   { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.35); }
-.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
-.btn-terra     { background: var(--terra); color: var(--white); }
-.btn-terra:hover { background: var(--terra-soft); transform: translateY(-1px); }
-.btn-terra-outline { background: transparent; color: var(--terra); border: 1.5px solid var(--terra); }
-.btn-terra-outline:hover { background: var(--terra-pale); }
-.btn-green     { background: var(--green); color: var(--white); }
-.btn-green:hover { background: var(--green-mid); transform: translateY(-1px); }
-.btn-green-outline { background: transparent; color: var(--green); border: 1.5px solid rgba(30,58,15,0.25); }
-.btn-green-outline:hover { background: var(--green-mist); }
+/* SECTIONS */
+section { padding: 6rem 2rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; color: var(--core); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem; }
+h1 { font-family: var(--font-serif); font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.1; color: var(--deep); }
+h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.2; color: var(--deep); }
+h3 { font-family: var(--font-serif); font-size: 1.4rem; color: var(--deep); margin-bottom: 0.5rem; }
+p { color: #4a4a3a; line-height: 1.75; }
 
-/* ── HERO ────────────────────────────────────────────────────────────────── */
+/* HERO */
 #home {
   min-height: 100vh; display: flex; align-items: center;
-  background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 55%, #3A6520 100%);
+  background: linear-gradient(135deg, var(--deep) 0%, var(--anchor) 60%, var(--core) 100%);
   position: relative; overflow: hidden; padding-top: 64px;
 }
 .hero-bg-pulse {
   position: absolute; top: 50%; left: 0; right: 0;
   transform: translateY(-50%); opacity: 0.06; pointer-events: none;
 }
-.hero-content { position: relative; z-index: 2; max-width: 680px; }
-.hero-content .section-label { color: var(--green-pale); opacity: 0.8; }
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+.hero-content .section-label { color: var(--mint); }
 .hero-content h1 { color: var(--white); margin-bottom: 1.25rem; }
-.hero-content h1 em { font-style: italic; color: var(--green-pale); }
-.hero-content > p { color: rgba(255,255,255,0.75); font-size: 1.1rem; max-width: 500px; margin-bottom: 2rem; }
-.hero-actions { display: flex; gap: 0.875rem; flex-wrap: wrap; }
+.hero-content h1 em { font-style: italic; color: var(--mint); }
+.hero-content p { color: rgba(255,255,255,0.8); font-size: 1.15rem; max-width: 520px; margin-bottom: 2rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+.btn-primary { background: var(--white); color: var(--deep); }
+.btn-primary:hover { background: var(--mint); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.4); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--mint); }
+.btn-teal { background: var(--deep); color: var(--white); }
+.btn-teal:hover { background: var(--anchor); transform: translateY(-1px); }
+.btn-teal-outline { background: transparent; color: var(--deep); border: 1.5px solid var(--deep); }
+.btn-teal-outline:hover { background: var(--mist); }
 .hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; }
-.hero-stat .num { font-family: var(--font-display); font-size: 2rem; color: var(--green-pale); display: block; }
-.hero-stat .lbl { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+.hero-stat { }
+.hero-stat .num { font-family: var(--font-serif); font-size: 2rem; color: var(--mint); display: block; }
+.hero-stat .lbl { font-size: 0.8rem; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
+.hero-visual { position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); opacity: 0.12; pointer-events: none; }
 
-/* ── FEATURES ────────────────────────────────────────────────────────────── */
-#features { background: var(--white); }
+/* FEATURES */
+#features { background: var(--cream); }
 .features-intro { text-align: center; max-width: 600px; margin: 0 auto 3.5rem; }
 .features-intro p { margin-top: 1rem; }
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 .feature-card {
-  background: var(--white); border-radius: 20px; padding: 2rem;
-  border: 1px solid rgba(30,58,15,0.1);
+  background: var(--white); border-radius: 16px; padding: 2rem;
+  border: 1px solid rgba(29,158,117,0.1);
   transition: all 0.3s; position: relative; overflow: hidden;
-  box-shadow: 0 1px 4px rgba(30,58,15,0.05);
 }
-.feature-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--terra), var(--terra-soft));
-  opacity: 0; transition: opacity 0.3s;
-}
-.feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(30,58,15,0.1); }
+.feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--core), var(--mint)); opacity: 0; transition: opacity 0.3s; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(8,80,65,0.12); }
 .feature-card:hover::before { opacity: 1; }
-.feature-icon {
-  width: 48px; height: 48px; background: var(--green-mist); border-radius: 14px;
-  display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;
-}
+.feature-icon { width: 48px; height: 48px; background: var(--mist); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
 .feature-icon svg { width: 24px; height: 24px; }
-.feature-card h3 { font-size: 1.25rem; }
-.feature-card p { font-size: 0.88rem; margin-top: 0.5rem; }
-.feature-tag {
-  display: inline-block; font-size: 0.68rem; font-weight: 600; letter-spacing: 1px;
-  text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 20px; margin-top: 1rem;
-  background: var(--green-pale); color: var(--green-soft);
-}
-.feature-tag.coming { background: var(--terra-pale); color: var(--terra); }
+.feature-card p { font-size: 0.9rem; color: var(--gray); margin-top: 0.5rem; }
+.feature-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 4px; margin-top: 1rem; background: var(--mist); color: var(--anchor); }
+.feature-tag.coming { background: #FEF3E2; color: #B87D0A; }
 
-/* ── HOW IT WORKS ────────────────────────────────────────────────────────── */
-#how-it-works { background: var(--cream); }
+/* HOW IT WORKS */
+#how-it-works { background: var(--white); }
 .hiw-intro { text-align: center; max-width: 600px; margin: 0 auto 3.5rem; }
 .hiw-intro p { margin-top: 1rem; }
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; position: relative; }
 .step { text-align: center; padding: 1.5rem 1rem; }
-.step-num {
-  width: 52px; height: 52px; border-radius: 50%;
-  background: var(--green); color: var(--white);
-  font-family: var(--font-display); font-size: 1.4rem;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.25rem;
-}
-.step p { font-size: 0.88rem; margin-top: 0.5rem; }
+.step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--deep); color: var(--white); font-family: var(--font-serif); font-size: 1.4rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+.step p { font-size: 0.9rem; color: var(--gray); margin-top: 0.5rem; }
 .hiw-cta { text-align: center; margin-top: 3rem; }
 
-/* ── PRICING ─────────────────────────────────────────────────────────────── */
-#pricing { background: var(--white); }
+/* PRICING */
+#pricing { background: var(--cream); }
 .pricing-intro { text-align: center; max-width: 560px; margin: 0 auto 3rem; }
 .pricing-intro p { margin-top: 1rem; }
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; max-width: 900px; margin: 0 auto; }
-.price-card {
-  background: var(--white); border-radius: 20px; padding: 2rem;
-  border: 1px solid rgba(30,58,15,0.1);
-  box-shadow: 0 1px 4px rgba(30,58,15,0.05);
-}
-.price-card.featured { background: var(--green); border-color: var(--green); position: relative; }
-.price-badge {
-  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-  background: var(--terra); color: var(--white); font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 1px; text-transform: uppercase; padding: 0.25rem 0.8rem;
-  border-radius: 20px; white-space: nowrap;
-}
-.price-tier { font-size: 0.72rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-soft); margin-bottom: 0.75rem; }
-.price-card.featured .price-tier { color: var(--green-pale); }
-.price-amount { font-family: var(--font-display); font-size: 2.5rem; color: var(--green); line-height: 1; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+.price-card { background: var(--white); border-radius: 16px; padding: 2rem; border: 1px solid rgba(29,158,117,0.12); }
+.price-card.featured { background: var(--deep); border-color: var(--deep); position: relative; }
+.price-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--amber); color: var(--bark); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 0.25rem 0.8rem; border-radius: 20px; white-space: nowrap; }
+.price-tier { font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--core); margin-bottom: 0.75rem; }
+.price-card.featured .price-tier { color: var(--mint); }
+.price-amount { font-family: var(--font-serif); font-size: 2.5rem; color: var(--deep); line-height: 1; }
 .price-card.featured .price-amount { color: var(--white); }
-.price-period { font-size: 0.85rem; color: var(--muted); margin-left: 4px; }
-.price-card.featured .price-period { color: rgba(255,255,255,0.55); }
-.price-desc { font-size: 0.88rem; color: var(--muted); margin: 0.75rem 0 1.5rem; }
-.price-card.featured .price-desc { color: rgba(255,255,255,0.65); }
+.price-period { font-size: 0.85rem; color: var(--gray); margin-left: 4px; }
+.price-card.featured .price-period { color: rgba(255,255,255,0.6); }
+.price-desc { font-size: 0.9rem; color: var(--gray); margin: 0.75rem 0 1.5rem; }
+.price-card.featured .price-desc { color: rgba(255,255,255,0.7); }
 .price-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
-.price-features li { font-size: 0.88rem; display: flex; align-items: flex-start; gap: 0.6rem; color: var(--green); }
+.price-features li { font-size: 0.9rem; display: flex; align-items: flex-start; gap: 0.6rem; color: var(--bark); }
 .price-card.featured .price-features li { color: rgba(255,255,255,0.9); }
-.price-features li::before { content: '✓'; color: var(--green-soft); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-.price-card.featured .price-features li::before { color: var(--green-pale); }
+.price-features li::before { content: '✓'; color: var(--core); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.price-card.featured .price-features li::before { color: var(--mint); }
 .price-card .btn { width: 100%; justify-content: center; }
 
-/* ── FOR VETS ────────────────────────────────────────────────────────────── */
-#for-vets { background: var(--cream); }
+/* VETS */
+#for-vets { background: var(--white); }
 .vets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .vets-content .section-label { margin-bottom: 0.75rem; }
 .vets-content h2 { margin-bottom: 1rem; }
-.vets-content > p { margin-bottom: 1.5rem; }
+.vets-content p { margin-bottom: 1.5rem; }
 .vets-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2rem; }
-.vets-benefits li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.93rem; color: var(--muted); }
-.vets-benefits li::before { content: '→'; color: var(--terra); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
-.vets-visual { background: var(--green-mist); border-radius: 20px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.875rem; border: 1px solid var(--green-pale); }
-.vet-card-mini {
-  background: var(--white); border-radius: 14px; padding: 0.875rem 1.1rem;
-  border: 1px solid rgba(30,58,15,0.08);
-  box-shadow: 0 1px 3px rgba(30,58,15,0.04);
-}
-.vet-card-mini .label { font-size: 0.7rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.3rem; }
-.vet-card-mini .value { font-weight: 600; font-size: 0.88rem; color: var(--green); }
-.vet-card-mini .value.amber { color: var(--terra); }
-.vet-card-mini .value.good { color: var(--green-soft); }
+.vets-benefits li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; }
+.vets-benefits li::before { content: '→'; color: var(--core); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.vets-visual { background: var(--mist); border-radius: 20px; padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.vet-card-mini { background: var(--white); border-radius: 12px; padding: 1rem 1.25rem; border: 1px solid rgba(29,158,117,0.15); }
+.vet-card-mini .label { font-size: 0.75rem; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.25rem; }
+.vet-card-mini .value { font-weight: 600; color: var(--deep); }
+.vet-card-mini .value.amber { color: var(--amber); }
+.vet-card-mini .value.good { color: var(--core); }
 
-/* ── PETLOCATE ───────────────────────────────────────────────────────────── */
-#petlocate { background: var(--green); }
+/* PETLOCATE */
+#petlocate { background: var(--deep); }
 .petlocate-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-.petlocate-content .section-label { color: var(--green-pale); opacity: 0.8; }
+.petlocate-content .section-label { color: var(--mint); }
 .petlocate-content h2 { color: var(--white); margin-bottom: 1rem; }
-.petlocate-content > p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+.petlocate-content p { color: rgba(255,255,255,0.75); margin-bottom: 1.5rem; }
 .locate-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
-.locate-features li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.93rem; color: rgba(255,255,255,0.8); }
-.locate-features li::before { content: '◉'; color: var(--green-pale); font-size: 0.55rem; flex-shrink: 0; margin-top: 5px; }
+.locate-features li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+.locate-features li::before { content: '◉'; color: var(--mint); font-size: 0.6rem; flex-shrink: 0; margin-top: 5px; }
 .locate-visual { position: relative; }
-.locate-map-mock {
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px; padding: 2rem; aspect-ratio: 1;
-  display: flex; align-items: center; justify-content: center;
-}
-.coming-badge {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  background: rgba(196,98,45,0.15); border: 1px solid rgba(196,98,45,0.3);
-  color: var(--terra-soft); font-size: 0.8rem; font-weight: 600;
-  padding: 0.4rem 0.9rem; border-radius: 20px; margin-bottom: 1.25rem;
-}
-.coming-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--terra-soft); animation: pulse-dot 1.5s infinite; }
+.locate-map-mock { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+.coming-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(239,159,39,0.15); border: 1px solid rgba(239,159,39,0.3); color: var(--amber); font-size: 0.8rem; font-weight: 600; padding: 0.4rem 0.9rem; border-radius: 20px; margin-bottom: 1.25rem; }
+.coming-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); animation: pulse-dot 1.5s infinite; }
 @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 
-/* ── ABOUT ───────────────────────────────────────────────────────────────── */
+/* ABOUT */
 #about { background: var(--cream); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 .about-content p { margin-bottom: 1rem; }
 .directors { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
-.director-card {
-  background: var(--white); border-radius: 14px; padding: 1.25rem;
-  border: 1px solid rgba(30,58,15,0.1);
-  display: flex; align-items: center; gap: 1rem;
-  box-shadow: 0 1px 3px rgba(30,58,15,0.04);
-}
-.director-avatar {
-  width: 48px; height: 48px; border-radius: 50%; background: var(--green);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700;
-  color: var(--green-pale); flex-shrink: 0; letter-spacing: 0.5px;
-}
-.director-name { font-weight: 600; color: var(--green); font-size: 0.95rem; }
-.director-role { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
-.reg-block {
-  background: var(--white); border-radius: 14px; padding: 1.5rem;
-  border: 1px solid rgba(30,58,15,0.1);
-  font-family: var(--font-sans); font-size: 0.8rem; color: var(--muted); line-height: 2.2;
-  box-shadow: 0 1px 3px rgba(30,58,15,0.04);
-}
-.reg-block strong { color: var(--green); font-weight: 600; }
-.mission-block { background: var(--green); border-radius: 18px; padding: 2rem; color: rgba(255,255,255,0.8); }
-.mission-block h3 { color: var(--green-pale); margin-bottom: 0.75rem; font-size: 1.3rem; }
+.director-card { background: var(--white); border-radius: 12px; padding: 1.25rem; border: 1px solid rgba(29,158,117,0.1); display: flex; align-items: center; gap: 1rem; }
+.director-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--deep); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.1rem; color: var(--mint); flex-shrink: 0; }
+.director-name { font-weight: 600; color: var(--deep); font-size: 0.95rem; }
+.director-role { font-size: 0.8rem; color: var(--gray); }
+.reg-block { background: var(--white); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(29,158,117,0.1); font-family: var(--font-mono); font-size: 0.8rem; color: var(--gray); line-height: 2; }
+.reg-block strong { color: var(--deep); font-weight: 500; }
+.mission-block { background: var(--deep); border-radius: 16px; padding: 2rem; color: rgba(255,255,255,0.85); }
+.mission-block h3 { color: var(--mint); margin-bottom: 0.75rem; }
 
-/* ── CONTACT ─────────────────────────────────────────────────────────────── */
+/* CONTACT */
 #contact { background: var(--white); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 .contact-form { display: flex; flex-direction: column; gap: 1rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-.form-group label { font-size: 0.72rem; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 1.5px; }
+.form-group label { font-size: 0.85rem; font-weight: 500; color: var(--bark); }
 .form-group input, .form-group select, .form-group textarea {
-  padding: 0.7rem 1rem; border-radius: 10px; border: 1.5px solid var(--green-pale);
-  font-family: var(--font-sans); font-size: 0.93rem; color: var(--green);
-  background: var(--white); transition: border-color 0.2s; outline: none;
+  padding: 0.7rem 1rem; border-radius: 8px; border: 1.5px solid var(--lgray);
+  font-family: var(--font-sans); font-size: 0.95rem; color: var(--bark);
+  background: var(--cream); transition: border-color 0.2s; outline: none;
 }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-  border-color: var(--green-soft); background: var(--green-mist);
-}
-.form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); opacity: 0.7; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--core); background: var(--white); }
 .form-group textarea { resize: vertical; min-height: 120px; }
-.contact-right { display: flex; flex-direction: column; gap: 1.5rem; }
-.waitlist-highlight {
-  background: var(--green-mist); border-radius: 18px; padding: 1.75rem;
-  border: 1px solid var(--green-pale);
-}
-.waitlist-highlight h3 { color: var(--green); margin-bottom: 0.5rem; font-size: 1.2rem; }
-.waitlist-highlight p { font-size: 0.88rem; margin-bottom: 1.25rem; }
-.waitlist-input {
-  padding: 0.7rem 1rem; border-radius: 10px; border: 1.5px solid var(--green-pale);
-  font-family: var(--font-sans); font-size: 0.93rem; background: var(--white);
-  outline: none; width: 100%; color: var(--green); transition: border-color 0.2s;
-}
-.waitlist-input:focus { border-color: var(--green-soft); }
-.quick-links { background: var(--cream); border-radius: 18px; padding: 1.75rem; border: 1px solid var(--cream-dark); }
-.quick-links h3 { color: var(--green); margin-bottom: 1rem; font-size: 1.2rem; }
-.quick-links-btns { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+.contact-info h3 { margin-bottom: 0.25rem; }
+.contact-info p { font-size: 0.95rem; }
+.waitlist-highlight { background: var(--mist); border-radius: 16px; padding: 2rem; border: 1px solid rgba(29,158,117,0.15); }
+.waitlist-highlight h3 { color: var(--deep); margin-bottom: 0.5rem; }
+.waitlist-highlight p { font-size: 0.9rem; color: var(--gray); margin-bottom: 1.25rem; }
 
-/* ── FOOTER ──────────────────────────────────────────────────────────────── */
-footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5rem 2rem 2rem; }
-.footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; padding-bottom: 2rem; }
-.footer-brand p { font-size: 0.875rem; margin-top: 0.75rem; max-width: 260px; color: rgba(255,255,255,0.5); }
-.footer-brand .nav-wordmark { color: var(--white); font-size: 1.15rem; }
-.footer-brand .nav-wordmark span { color: var(--terra-soft); }
-.footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
-.footer-col a { display: block; font-size: 0.875rem; color: rgba(255,255,255,0.55); text-decoration: none; margin-bottom: 0.5rem; transition: color 0.2s; }
-.footer-col a:hover { color: var(--green-pale); }
-.footer-popia { font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-top: 0.4rem; }
-.footer-bottom {
-  max-width: 1100px; margin: 0 auto; padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: rgba(255,255,255,0.35);
-}
-.footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-.footer-bottom a:hover { color: var(--green-pale); }
-.footer-bottom-links { display: flex; gap: 1.5rem; }
+/* FOOTER */
+footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2rem; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; }
+.footer-brand p { font-size: 0.875rem; margin-top: 0.75rem; max-width: 260px; }
+.footer-brand .nav-wordmark { color: var(--white); font-size: 1.1rem; }
+.footer-col h4 { font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+.footer-col a { display: block; font-size: 0.875rem; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 0.5rem; transition: color 0.2s; }
+.footer-col a:hover { color: var(--mint); }
+.footer-bottom { max-width: 1100px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; }
+.footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.footer-bottom a:hover { color: var(--mint); }
 
-/* ── ANIMATIONS ──────────────────────────────────────────────────────────── */
-.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
+/* PULSE MARK SVG */
+.pulse-mark { display: inline-block; }
 
-/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .vets-grid, .petlocate-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .footer-inner { grid-template-columns: 1fr 1fr; }
-}
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
+  .vets-grid, .petlocate-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
   section { padding: 4rem 1.25rem; }
   .form-row { grid-template-columns: 1fr; }
-  h1 { font-size: 2.4rem; }
-  h2 { font-size: 1.8rem; }
-  .hero-stats { gap: 1.75rem; }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
-  .steps { grid-template-columns: 1fr 1fr; }
-  .features-grid { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
 }
-
 @media (max-width: 480px) {
   .footer-inner { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr; }
-  .hero-stats { flex-direction: column; gap: 1.25rem; }
-  nav { padding: 0 1.25rem; }
-  section { padding: 3.5rem 1.25rem; }
-  .btn { padding: 0.7rem 1.25rem; font-size: 0.875rem; }
+  .pricing-grid { grid-template-columns: 1fr; }
 }
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ACTIVE NAV */
+.nav-links a.active { color: var(--core); }
 </style>
 </head>
 <body>
@@ -364,14 +254,14 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
 <!-- NAV -->
 <nav id="navbar">
   <a href="#home" class="nav-logo">
-    <svg viewBox="0 0 38 38" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="38" height="38" rx="9" fill="#1E3A0F"/>
-      <polyline points="4,19 9,19 12,11 15,25 18,15 21,19 26,19" fill="none" stroke="#EAF3DE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <ellipse cx="30" cy="19" rx="5.5" ry="4.5" fill="#4A7C2B"/>
-      <ellipse cx="24.5" cy="13.5" rx="2.5" ry="2" fill="#4A7C2B"/>
-      <ellipse cx="28" cy="11.5" rx="2.5" ry="2" fill="#4A7C2B"/>
-      <ellipse cx="32" cy="11.5" rx="2.5" ry="2" fill="#4A7C2B"/>
-      <ellipse cx="35.5" cy="13.5" rx="2.5" ry="2" fill="#4A7C2B"/>
+    <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="38" height="38" rx="9" fill="#085041"/>
+      <polyline points="4,19 9,19 12,11 15,25 18,15 21,19 26,19" fill="none" stroke="#9FE1CB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="30" cy="19" rx="5.5" ry="4.5" fill="#1D9E75"/>
+      <ellipse cx="24.5" cy="13.5" rx="2.5" ry="2" fill="#1D9E75"/>
+      <ellipse cx="28" cy="11.5" rx="2.5" ry="2" fill="#1D9E75"/>
+      <ellipse cx="32" cy="11.5" rx="2.5" ry="2" fill="#1D9E75"/>
+      <ellipse cx="35.5" cy="13.5" rx="2.5" ry="2" fill="#1D9E75"/>
     </svg>
     <span class="nav-wordmark">Pet<span>Vet</span></span>
   </a>
@@ -383,8 +273,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
     <a href="#petlocate">PetLocate</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
-    <!-- Update this href to your live app URL -->
-    <a href="https://petvet-app.vercel.app" class="nav-cta">Open App →</a>
+    <a href="http://localhost:3004" class="nav-cta">Open App →</a>
   </div>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
@@ -398,7 +287,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
   <a href="#petlocate" onclick="toggleMenu()">PetLocate</a>
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
-  <a href="https://petvet-app.vercel.app" class="mcta" onclick="toggleMenu()">Open App →</a>
+  <a href="http://localhost:3004" class="mcta">Open App →</a>
 </div>
 
 <!-- HERO -->
@@ -412,7 +301,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       <h1>Your pet's health.<br/><em>Tracked. Always.</em></h1>
       <p>Complete health records, smart reminders, vet cost tracking and location management — everything a responsible pet owner needs in one place.</p>
       <div class="hero-actions">
-        <a href="https://petvet-app.vercel.app" class="btn btn-terra">Get Started Free →</a>
+        <a href="http://localhost:3004" class="btn btn-primary">Get Started Free →</a>
         <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
       </div>
       <div class="hero-stats">
@@ -435,7 +324,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
     <div class="features-grid">
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C2B" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
         <h3>Health Records</h3>
         <p>Complete vaccination history, vet visits, treatments, diagnoses and prescriptions — all in one verifiable timeline.</p>
@@ -443,7 +332,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C2B" stroke-width="2" stroke-linecap="round"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
         </div>
         <h3>Smart Reminders</h3>
         <p>Automated nudges for upcoming vaccinations, deworming, annual checkups and licence renewals. Never miss a due date again.</p>
@@ -451,7 +340,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C2B" stroke-width="2" stroke-linecap="round"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
         <h3>Vet Cost Tracker</h3>
         <p>Log every vet expense, track spend by category and pet, and budget ahead for routine care. Full financial visibility.</p>
@@ -459,7 +348,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C2B" stroke-width="2" stroke-linecap="round"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
         </div>
         <h3>Document Vault</h3>
         <p>Securely store vaccination certificates, microchip records, adoption papers and vet reports. Accessible anywhere, anytime.</p>
@@ -467,7 +356,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C2B" stroke-width="2" stroke-linecap="round"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         </div>
         <h3>PetLocate</h3>
         <p>Real-time GPS tracking, lost pet alerts, area control zones and neighbourhood safety maps — coming to PetVet soon.</p>
@@ -475,7 +364,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C2B" stroke-width="2" stroke-linecap="round"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         </div>
         <h3>Multi-Pet Profiles</h3>
         <p>Manage dogs, cats, birds, rabbits and more under one account. Each pet gets their own complete health profile.</p>
@@ -516,7 +405,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       </div>
     </div>
     <div class="hiw-cta fade-up">
-      <a href="https://petvet-app.vercel.app" class="btn btn-terra">Start Tracking Your Pet →</a>
+      <a href="http://localhost:3004" class="btn btn-teal">Start Tracking Your Pet →</a>
     </div>
   </div>
 </section>
@@ -541,7 +430,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
           <li>Document storage (250MB)</li>
           <li>Expense tracking</li>
         </ul>
-        <a href="https://petvet-app.vercel.app" class="btn btn-green-outline">Get Started Free</a>
+        <a href="http://localhost:3004" class="btn btn-teal-outline">Get Started Free</a>
       </div>
       <div class="price-card featured fade-up">
         <div class="price-badge">Most Popular</div>
@@ -556,7 +445,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
           <li>Shareable health reports</li>
           <li>Priority support</li>
         </ul>
-        <a href="https://petvet-app.vercel.app" class="btn btn-terra">Start Pro Free →</a>
+        <a href="http://localhost:3004" class="btn btn-primary">Start Pro Free →</a>
       </div>
       <div class="price-card fade-up">
         <div class="price-tier">Clinic</div>
@@ -570,7 +459,7 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
           <li>White-label reports</li>
           <li>API access</li>
         </ul>
-        <a href="#contact" class="btn btn-green-outline">Contact Us</a>
+        <a href="#contact" class="btn btn-teal-outline">Contact Us</a>
       </div>
     </div>
   </div>
@@ -592,9 +481,9 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
           <li>Clinic dashboard to view and update patient records</li>
           <li>Branded health reports for owner take-home</li>
         </ul>
-        <div style="display:flex;gap:0.875rem;flex-wrap:wrap;">
-          <a href="#contact" class="btn btn-terra">Partner With Us →</a>
-          <a href="#pricing" class="btn btn-green-outline">See Clinic Pricing</a>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="#contact" class="btn btn-teal">Partner With Us →</a>
+          <a href="#pricing" class="btn btn-teal-outline">See Clinic Pricing</a>
         </div>
       </div>
       <div class="vets-visual fade-up">
@@ -644,20 +533,25 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       <div class="locate-visual fade-up">
         <div class="locate-map-mock">
           <svg viewBox="0 0 240 240" width="240" height="240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Grid lines -->
             <line x1="0" y1="60" x2="240" y2="60" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
             <line x1="0" y1="120" x2="240" y2="120" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
             <line x1="0" y1="180" x2="240" y2="180" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
             <line x1="60" y1="0" x2="60" y2="240" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
             <line x1="120" y1="0" x2="120" y2="240" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
             <line x1="180" y1="0" x2="180" y2="240" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <circle cx="120" cy="120" r="70" stroke="#4A7C2B" stroke-width="1.5" stroke-dasharray="6 4" fill="rgba(74,124,43,0.06)"/>
-            <circle cx="120" cy="105" r="12" fill="#4A7C2B"/>
+            <!-- Safe zone circle -->
+            <circle cx="120" cy="120" r="70" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="6 4" fill="rgba(29,158,117,0.05)"/>
+            <!-- Pet marker -->
+            <circle cx="120" cy="105" r="12" fill="#1D9E75"/>
             <text x="120" y="110" text-anchor="middle" font-size="12" fill="white">🐾</text>
-            <line x1="120" y1="117" x2="120" y2="130" stroke="#4A7C2B" stroke-width="2"/>
-            <circle cx="120" cy="132" r="3" fill="#4A7C2B"/>
-            <circle cx="120" cy="105" r="20" stroke="#4A7C2B" stroke-width="1" opacity="0.4"/>
-            <circle cx="120" cy="105" r="30" stroke="#4A7C2B" stroke-width="0.5" opacity="0.2"/>
-            <rect x="85" y="75" width="70" height="20" rx="4" fill="rgba(74,124,43,0.9)"/>
+            <line x1="120" y1="117" x2="120" y2="130" stroke="#1D9E75" stroke-width="2"/>
+            <circle cx="120" cy="132" r="3" fill="#1D9E75"/>
+            <!-- Pulse rings -->
+            <circle cx="120" cy="105" r="20" stroke="#1D9E75" stroke-width="1" opacity="0.4"/>
+            <circle cx="120" cy="105" r="30" stroke="#1D9E75" stroke-width="0.5" opacity="0.2"/>
+            <!-- Label -->
+            <rect x="85" y="75" width="70" height="20" rx="4" fill="rgba(29,158,117,0.9)"/>
             <text x="120" y="89" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif">Biscuit · Home</text>
           </svg>
         </div>
@@ -673,9 +567,9 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       <div class="fade-up">
         <p class="section-label">About PetVet</p>
         <h2>Built by pet owners, for pet owners.</h2>
-        <div class="about-content" style="margin-top:1.25rem;">
+        <div style="margin-top:1.25rem;">
           <p>PetVet was founded with a simple belief: responsible pet ownership starts with knowing your animal's health history. Too many South African pets miss critical vaccinations, treatments get forgotten, and vet visits go undocumented.</p>
-          <p>We built the platform we wished existed — one that makes accountability effortless, keeps records permanent, and puts owners in control of their pet's wellbeing.</p>
+          <p style="margin-top:0.75rem;">We built the platform we wished existed — one that makes accountability effortless, keeps records permanent, and puts owners in control of their pet's wellbeing.</p>
         </div>
         <div class="directors">
           <div class="director-card">
@@ -748,23 +642,23 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
             <label>Message</label>
             <textarea placeholder="Tell us what's on your mind..."></textarea>
           </div>
-          <button type="submit" class="btn btn-terra" style="width:100%;justify-content:center;">Send Message →</button>
+          <button type="submit" class="btn btn-teal" style="width:100%;justify-content:center;">Send Message →</button>
         </form>
       </div>
-      <div class="fade-up contact-right">
+      <div class="fade-up">
         <div class="waitlist-highlight">
           <h3>Join the PetLocate waitlist</h3>
           <p>Be first to access GPS tracking and area control when PetLocate launches. No spam, just a single notification when it's ready.</p>
           <form onsubmit="handleWaitlist(event)" style="display:flex;flex-direction:column;gap:0.75rem;">
-            <input class="waitlist-input" type="email" placeholder="your@email.com" required/>
-            <button type="submit" class="btn btn-green" style="justify-content:center;">Join PetLocate Waitlist →</button>
+            <input type="email" placeholder="your@email.com" style="padding:0.7rem 1rem;border-radius:8px;border:1.5px solid rgba(29,158,117,0.3);font-family:var(--font-sans);font-size:0.95rem;background:white;outline:none;" required/>
+            <button type="submit" class="btn btn-teal" style="justify-content:center;">Join PetLocate Waitlist →</button>
           </form>
         </div>
-        <div class="quick-links">
-          <h3>Quick links</h3>
-          <div class="quick-links-btns">
-            <a href="https://petvet-app.vercel.app" class="btn btn-terra" style="justify-content:center;">Open PetVet App →</a>
-            <a href="https://petvet-app.vercel.app/register" class="btn btn-green-outline" style="justify-content:center;">Create Free Account</a>
+        <div style="margin-top:1.5rem;padding:1.5rem;background:var(--cream);border-radius:16px;">
+          <h3 style="margin-bottom:1rem;">Quick links</h3>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <a href="http://localhost:3004" class="btn btn-teal" style="justify-content:center;">Open PetVet App →</a>
+            <a href="http://localhost:3004/register" class="btn btn-teal-outline" style="justify-content:center;">Create Free Account</a>
           </div>
         </div>
       </div>
@@ -776,9 +670,9 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="nav-wordmark">Pet<span>Vet</span></span>
+      <span class="nav-wordmark">Pet<span style="color:var(--mint)">Vet</span></span>
       <p>South Africa's pet health management platform. Health. Tracked. Always.</p>
-      <p class="footer-popia">Reg 2026/370983/07 · POPIA Compliant</p>
+      <p style="margin-top:0.5rem;font-size:0.75rem;opacity:0.5;">Reg 2026/370983/07 · POPIA Compliant</p>
     </div>
     <div class="footer-col">
       <h4>Platform</h4>
@@ -797,12 +691,12 @@ footer { background: var(--green); color: rgba(255,255,255,0.55); padding: 3.5re
       <h4>Company</h4>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-      <a href="https://petvet-app.vercel.app">Open App</a>
+      <a href="http://localhost:3004">Open App</a>
     </div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 PetVet (PTY) Ltd · All rights reserved</span>
-    <div class="footer-bottom-links">
+    <div style="display:flex;gap:1.5rem;">
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
       <a href="#">POPIA Notice</a>
@@ -816,19 +710,10 @@ function toggleMenu() {
   m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
 }
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-  const m = document.getElementById('mobileMenu');
-  const h = document.getElementById('hamburger');
-  if (m.style.display === 'flex' && !m.contains(e.target) && !h.contains(e.target)) {
-    m.style.display = 'none';
-  }
-});
-
 // Fade-up on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08 });
+}, { threshold: 0.1 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 // Active nav on scroll
@@ -841,24 +726,22 @@ window.addEventListener('scroll', () => {
     a.classList.remove('active');
     if (a.getAttribute('href') === '#' + current) a.classList.add('active');
   });
-}, { passive: true });
+});
 
 function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
-  const orig = btn.textContent;
+  const btn = e.target.querySelector('button');
   btn.textContent = '✓ Message sent!';
-  btn.style.background = 'var(--green-soft)';
-  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
+  btn.style.background = 'var(--core)';
+  setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
 }
 
 function handleWaitlist(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
-  const orig = btn.textContent;
-  btn.textContent = "✓ You're on the list!";
-  btn.style.background = 'var(--green-soft)';
-  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
+  const btn = e.target.querySelector('button');
+  btn.textContent = '✓ You\'re on the list!';
+  btn.style.background = 'var(--core)';
+  setTimeout(() => { btn.textContent = 'Join PetLocate Waitlist →'; btn.style.background = ''; }, 3000);
 }
 </script>
 </body>

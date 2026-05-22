@@ -5,9 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>PetVet — Health. Tracked. Always.</title>
 <meta name="description" content="PetVet is South Africa's pet health management platform. Track vaccinations, vet visits, costs and locate your pet — all in one place."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://www.petvet.org.za/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="PetVet"/>
+<meta property="og:title" content="PetVet — Health. Tracked. Always."/>
+<meta property="og:description" content="Track vaccinations, vet visits, costs and pet records in one South African pet health platform."/>
+<meta property="og:url" content="https://www.petvet.org.za/"/>
+<meta property="og:image" content="https://www.petvet.org.za/family-hero.jpg"/>
+<meta property="og:locale" content="en_ZA"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="PetVet — Health. Tracked. Always."/>
+<meta name="twitter:description" content="Track vaccinations, vet visits, costs and pet records in one South African pet health platform."/>
+<meta name="twitter:image" content="https://www.petvet.org.za/family-hero.jpg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "PetVet",
+      "url": "https://www.petvet.org.za/",
+      "logo": "https://www.petvet.org.za/family-hero.jpg",
+      "email": "hello@petvet.org.za",
+      "sameAs": [
+        "https://app.petvet.org.za/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "name": "PetVet",
+      "url": "https://www.petvet.org.za/",
+      "inLanguage": "en-ZA",
+      "publisher": {
+        "@type": "Organization",
+        "name": "PetVet"
+      }
+    }
+  ]
+}
+</script>
 <style>
 :root {
   --deep:    #085041;
@@ -241,6 +281,12 @@ footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2r
 @media (max-width: 480px) {
   .footer-inner { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
+  .hero-float-badge { display: none; }
+  .hero-img-card { width: 210px; height: 265px; border-radius: 20px; }
+  .hero-scene-wrap { min-height: 270px; }
+  .hero-stats { margin-top: 1.5rem; gap: 1.5rem; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
 }
 
 /* ANIMATIONS */
@@ -277,7 +323,7 @@ footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2r
   width: 320px; height: 400px; border-radius: 26px; overflow: hidden;
   transform-style: preserve-3d; transition: transform 0.08s linear;
   box-shadow: 0 32px 80px rgba(0,0,0,0.38), 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.18);
-  cursor: pointer;
+  cursor: default;
 }
 .hero-img-card-inner {
   width: 100%; height: 100%;
@@ -410,7 +456,7 @@ footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2r
       <div class="hero-scene">
         <div class="hero-img-card" id="heroCard">
           <div class="hero-img-card-inner">
-            <img src="family-hero.jpg" alt="A family with their dog" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
+            <img src="family-hero.jpg" alt="A vet and pet owner with their dog at a clinic" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
             <div style="position:absolute;bottom:0;left:0;right:0;height:130px;background:linear-gradient(to top,rgba(8,80,65,0.82),transparent);pointer-events:none;"></div>
             <div class="hero-card-footer">
               <strong style="color:var(--deep);">The Thompson family</strong>
@@ -729,35 +775,70 @@ footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2r
         <p class="section-label">Get In Touch</p>
         <h2>Talk to us.</h2>
         <p style="margin-bottom:2rem;">Whether you're a pet owner, vet practice or potential partner — we want to hear from you.</p>
-        <form class="contact-form" onsubmit="handleSubmit(event)">
+        <p style="margin:-1rem 0 2rem;display:flex;flex-wrap:wrap;gap:0.75rem;">
+          <a href="mailto:hello@petvet.org.za" class="btn btn-teal-outline">Email hello@petvet.org.za</a>
+        </p>
+        <form class="contact-form" data-lead-form="contact" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="leadType" value="contact"/>
+          <input type="hidden" name="company" value=""/>
+          <input type="hidden" name="startedAt" value=""/>
           <div class="form-row">
             <div class="form-group">
               <label>First name</label>
-              <input type="text" placeholder="Stephen" required/>
+              <input type="text" name="firstName" placeholder="Stephen" required/>
             </div>
             <div class="form-group">
               <label>Last name</label>
-              <input type="text" placeholder="van der Merwe" required/>
+              <input type="text" name="lastName" placeholder="van der Merwe" required/>
             </div>
           </div>
           <div class="form-group">
             <label>Email address</label>
-            <input type="email" placeholder="you@example.com" required/>
+            <input type="email" name="email" placeholder="you@example.com" required/>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone number</label>
+              <input type="tel" name="phone" placeholder="+27 82 000 0000" required/>
+            </div>
+            <div class="form-group">
+              <label>Pet type</label>
+              <select name="petType" required>
+                <option value="">Select pet type</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Dog & Cat</option>
+                <option>Bird</option>
+                <option>Small pet / exotic</option>
+                <option>No pet yet</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
-            <label>I am a...</label>
-            <select>
-              <option>Pet owner</option>
-              <option>Veterinarian / Clinic</option>
-              <option>Pet service provider</option>
-              <option>Investor / Partner</option>
+            <label>Suburb / location</label>
+            <input type="text" name="suburb" placeholder="Bryanston, Johannesburg" required/>
+          </div>
+          <div class="form-group">
+            <label>Enquiry type</label>
+            <select name="enquiryType" required>
+              <option value="">Select enquiry type</option>
+              <option>Pet owner enquiry</option>
+              <option>Vet practice / clinic enquiry</option>
+              <option>Booking interest</option>
+              <option>Partnership / investor</option>
+              <option>PetLocate interest</option>
               <option>Other</option>
             </select>
           </div>
           <div class="form-group">
             <label>Message</label>
-            <textarea placeholder="Tell us what's on your mind..."></textarea>
+            <textarea name="message" placeholder="Tell us what's on your mind..." required></textarea>
           </div>
+          <label style="display:flex;align-items:flex-start;gap:0.75rem;font-size:0.9rem;color:var(--gray);line-height:1.5;">
+            <input type="checkbox" name="consent" style="margin-top:0.25rem;" required/>
+            <span>I consent to PetVet contacting me about this enquiry and understand my information will be handled in line with the POPIA notice.</span>
+          </label>
+          <p class="form-status" data-form-status style="font-size:0.9rem;color:var(--gray);min-height:1.5rem;" aria-live="polite"></p>
           <button type="submit" class="btn btn-teal" style="width:100%;justify-content:center;">Send Message →</button>
         </form>
       </div>
@@ -765,8 +846,29 @@ footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2r
         <div class="waitlist-highlight">
           <h3>Join the PetLocate waitlist</h3>
           <p>Be first to access GPS tracking and area control when PetLocate launches. No spam, just a single notification when it's ready.</p>
-          <form onsubmit="handleWaitlist(event)" style="display:flex;flex-direction:column;gap:0.75rem;">
-            <input type="email" placeholder="your@email.com" style="padding:0.7rem 1rem;border-radius:8px;border:1.5px solid rgba(29,158,117,0.3);font-family:var(--font-sans);font-size:0.95rem;background:white;outline:none;" required/>
+          <form data-lead-form="waitlist" onsubmit="handleWaitlist(event)" style="display:flex;flex-direction:column;gap:0.75rem;">
+            <input type="hidden" name="leadType" value="waitlist"/>
+            <input type="hidden" name="company" value=""/>
+            <input type="hidden" name="startedAt" value=""/>
+            <input type="hidden" name="enquiryType" value="PetLocate waitlist"/>
+            <input type="text" name="fullName" placeholder="Your full name" style="padding:0.7rem 1rem;border-radius:8px;border:1.5px solid rgba(29,158,117,0.3);font-family:var(--font-sans);font-size:0.95rem;background:white;outline:none;" required/>
+            <input type="email" name="email" placeholder="your@email.com" style="padding:0.7rem 1rem;border-radius:8px;border:1.5px solid rgba(29,158,117,0.3);font-family:var(--font-sans);font-size:0.95rem;background:white;outline:none;" required/>
+            <input type="tel" name="phone" placeholder="+27 82 000 0000" style="padding:0.7rem 1rem;border-radius:8px;border:1.5px solid rgba(29,158,117,0.3);font-family:var(--font-sans);font-size:0.95rem;background:white;outline:none;" required/>
+            <input type="text" name="suburb" placeholder="Suburb / location" style="padding:0.7rem 1rem;border-radius:8px;border:1.5px solid rgba(29,158,117,0.3);font-family:var(--font-sans);font-size:0.95rem;background:white;outline:none;" required/>
+            <select name="petType" style="padding:0.7rem 1rem;border-radius:8px;border:1.5px solid rgba(29,158,117,0.3);font-family:var(--font-sans);font-size:0.95rem;background:white;outline:none;" required>
+              <option value="">Pet type</option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Dog & Cat</option>
+              <option>Bird</option>
+              <option>Small pet / exotic</option>
+              <option>No pet yet</option>
+            </select>
+            <label style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:var(--gray);line-height:1.5;">
+              <input type="checkbox" name="consent" style="margin-top:0.2rem;" required/>
+              <span>I consent to PetVet contacting me about PetLocate and future rollout updates.</span>
+            </label>
+            <p class="form-status" data-form-status style="font-size:0.9rem;color:var(--gray);min-height:1.25rem;" aria-live="polite"></p>
             <button type="submit" class="btn btn-teal" style="justify-content:center;">Join PetLocate Waitlist →</button>
           </form>
         </div>
@@ -775,6 +877,7 @@ footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2r
           <div style="display:flex;flex-direction:column;gap:0.5rem;">
             <a href="https://app.petvet.org.za" class="btn btn-teal" style="justify-content:center;">Open PetVet App →</a>
             <a href="https://app.petvet.org.za/register" class="btn btn-teal-outline" style="justify-content:center;">Create Free Account</a>
+            <a href="#" id="whatsappCta" class="btn btn-teal-outline" style="justify-content:center;display:none;">Chat to PetVet on WhatsApp</a>
           </div>
         </div>
       </div>
@@ -846,19 +949,134 @@ window.addEventListener('scroll', () => {
 
 function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.textContent = '✓ Message sent!';
-  btn.style.background = 'var(--core)';
-  setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
+  submitLeadForm(e.target, {
+    successText: 'Thanks. Your message has been received.',
+    eventName: 'contact_submit',
+    buttonText: 'Send Message →',
+    loadingText: 'Sending…'
+  });
 }
 
 function handleWaitlist(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.textContent = '✓ You\'re on the list!';
-  btn.style.background = 'var(--core)';
-  setTimeout(() => { btn.textContent = 'Join PetLocate Waitlist →'; btn.style.background = ''; }, 3000);
+  submitLeadForm(e.target, {
+    successText: 'You are on the PetLocate waitlist.',
+    eventName: 'waitlist_submit',
+    buttonText: 'Join PetLocate Waitlist →',
+    loadingText: 'Joining…'
+  });
 }
+
+window.PETVET_CONFIG = window.PETVET_CONFIG || {
+  whatsappNumber: '',
+  gaMeasurementId: ''
+};
+
+function trackEvent(name, params = {}) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: name, ...params });
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', name, params);
+  }
+}
+
+function loadAnalytics() {
+  const gaMeasurementId = window.PETVET_CONFIG && window.PETVET_CONFIG.gaMeasurementId;
+  if (!gaMeasurementId || typeof window.gtag === 'function') return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', gaMeasurementId, { send_page_view: true });
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+  document.head.appendChild(script);
+}
+
+function setFormStatus(form, message, tone) {
+  const status = form.querySelector('[data-form-status]');
+  if (!status) return;
+  status.textContent = message || '';
+  status.style.color = tone === 'error' ? '#A84B30' : tone === 'success' ? 'var(--anchor)' : 'var(--gray)';
+}
+
+async function submitLeadForm(form, config) {
+  const btn = form.querySelector('button[type="submit"]');
+  const originalText = config.buttonText;
+  const firstName = form.elements.firstName ? form.elements.firstName.value.trim() : '';
+  const lastName = form.elements.lastName ? form.elements.lastName.value.trim() : '';
+  const fullName = form.elements.fullName ? form.elements.fullName.value.trim() : `${firstName} ${lastName}`.trim();
+
+  const payload = {
+    leadType: form.elements.leadType.value,
+    fullName,
+    email: form.elements.email.value.trim(),
+    phone: form.elements.phone.value.trim(),
+    petType: form.elements.petType.value.trim(),
+    suburb: form.elements.suburb.value.trim(),
+    enquiryType: form.elements.enquiryType.value.trim(),
+    message: form.elements.message ? form.elements.message.value.trim() : '',
+    consent: Boolean(form.elements.consent && form.elements.consent.checked),
+    website: window.location.hostname,
+    pageUrl: window.location.href,
+    startedAt: Number(form.elements.startedAt.value),
+    company: form.elements.company.value.trim()
+  };
+
+  btn.disabled = true;
+  btn.textContent = config.loadingText;
+  setFormStatus(form, '', 'default');
+
+  try {
+    const response = await fetch('https://app.petvet.org.za/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.error || 'We could not save your details right now.');
+    }
+
+    form.reset();
+    if (form.elements.startedAt) form.elements.startedAt.value = Date.now();
+    setFormStatus(form, config.successText, 'success');
+    trackEvent(config.eventName, { lead_type: payload.leadType, enquiry_type: payload.enquiryType });
+  } catch (error) {
+    setFormStatus(form, error.message || 'Something went wrong. Please try again.', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
+
+document.querySelectorAll('form[data-lead-form]').forEach((form) => {
+  if (form.elements.startedAt) form.elements.startedAt.value = Date.now();
+});
+
+document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('email_click', { href: link.getAttribute('href') }));
+});
+
+document.querySelectorAll('a[href^="https://app.petvet.org.za"]').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('app_cta_click', { href: link.getAttribute('href') }));
+});
+
+function setupWhatsAppCta() {
+  const cta = document.getElementById('whatsappCta');
+  const number = (window.PETVET_CONFIG && window.PETVET_CONFIG.whatsappNumber || '').replace(/\D/g, '');
+  if (!cta || !number) return;
+  cta.href = `https://wa.me/${number}`;
+  cta.style.display = 'inline-flex';
+  cta.addEventListener('click', () => trackEvent('whatsapp_click', { destination: number }));
+}
+
+setupWhatsAppCta();
+loadAnalytics();
 
 // 3D tilt on hero card
 (function() {

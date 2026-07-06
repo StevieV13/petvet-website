@@ -18,6 +18,7 @@
 <meta name="twitter:title" content="PetVet — Health. Tracked. Always."/>
 <meta name="twitter:description" content="Track vaccinations, vet visits, costs and pet records in one South African pet health platform."/>
 <meta name="twitter:image" content="https://www.petvet.org.za/family-hero.jpg"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -131,7 +132,6 @@ p { color: #4a4a3a; line-height: 1.75; }
 .hero-stat { }
 .hero-stat .num { font-family: var(--font-serif); font-size: 2rem; color: var(--mint); display: block; }
 .hero-stat .lbl { font-size: 0.8rem; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
-.hero-visual { display: none; }
 .hero-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; width: 100%; }
 
 /* FEATURES */
@@ -276,7 +276,6 @@ footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2r
   .footer-inner { grid-template-columns: 1fr 1fr; }
   section { padding: 4rem 1.25rem; }
   .form-row { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
 }
 @media (max-width: 480px) {
   .footer-inner { grid-template-columns: 1fr; }
@@ -412,7 +411,7 @@ footer { background: var(--bark); color: rgba(255,255,255,0.6); padding: 3rem 2r
   <a href="#pricing" onclick="toggleMenu()">Pricing</a>
   <a href="#for-vets" onclick="toggleMenu()">For Vets</a>
   <a href="#petlocate" onclick="toggleMenu()">PetLocate</a>
-  <a href="https://app.petvet.org.za">Demo Profile</a>
+  <a href="https://app.petvet.org.za" onclick="toggleMenu()">Demo Profile</a>
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
   <a href="https://app.petvet.org.za" class="mcta">Open App →</a>
@@ -953,7 +952,7 @@ window.addEventListener('scroll', () => {
     a.classList.remove('active');
     if (a.getAttribute('href') === '#' + current) a.classList.add('active');
   });
-});
+}, { passive: true });
 
 function handleSubmit(e) {
   e.preventDefault();
